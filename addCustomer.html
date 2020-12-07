@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Add New Customer</title>
+</head>
+<body>
+<!-- send action to addCustomer.php file -->
+ <form action="addCustomer.php" method="POST">
+  <table>
+   <tr>
+    <td>First Name :</td>
+    <td><input type="text" name="fname" required></td> <!-- the name values are referenced in the php file -->
+   </tr>
+   <tr>
+    <td>Last Name :</td>
+    <td><input type="text" name="lname" required></td>
+   </tr>
+   <tr>
+    <td>Phone number :</td>
+    <td><input type="text" name="phone" required></td>
+   </tr> 
+   <tr>
+    <td><input type="submit" value="Submit"></td> <!-- type value is referenced in php file -->
+   </tr>
+  </table>
+ </form>
+</body>
+</html>
