@@ -5,8 +5,10 @@ $con=mysqli_connect("localhost","root","","cpsc471hms");
 if(mysqli_connect_errno()){
     echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
-$result = mysqli_query($con,"SELECT M.Employee_id, E.name FROM MANAGER AS M, STAFF AS S, EMPLOYEE AS E WHERE M.Employee_id = S.Mgr_id AND S.Employee_id = E.Employee_id");
-$arrayRow = array();
+$result = mysqli_query($con,"SELECT M.Employee_id, A.name
+FROM MANAGER AS M, STAFF AS S, EMPLOYEE AS E, EMPLOYEE as A
+WHERE M.Employee_id = S.Mgr_id AND S.Employee_id = E.Employee_id AND A.Employee_id = M.Employee_id");
+$jsonArray = array();
 
 // echo "<table border='1'>
 // <tr>
@@ -14,16 +16,13 @@ $arrayRow = array();
 // <th>Name</th>
 // </tr>";
 
-while($row = mysqli_fetch_array($result)){
-    // echo "<tr>";
-    // echo "<td>" . $row['Employee_id'] . "</td>";
-    // echo "<td>" . $row['name'] . "</td>";
-    // echo "</tr>";
-    $arrayRow[] = $row;
+while($row = mysqli_fetch_assoc($result)){
+    $jsonArray[] = $row;
 }
+
 // echo "</table>";
 
-print(json_encode($arrayRow));
+echo(json_encode($jsonArray));
 
 mysqli_close($con);
 
