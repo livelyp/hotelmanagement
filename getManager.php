@@ -10,17 +10,9 @@ FROM MANAGER AS M, STAFF AS S, EMPLOYEE AS E, EMPLOYEE as A
 WHERE M.Employee_id = S.Mgr_id AND S.Employee_id = E.Employee_id AND A.Employee_id = M.Employee_id");
 $jsonArray = array();
 
-// echo "<table border='1'>
-// <tr>
-// <th>Employee_id</th>
-// <th>Name</th>
-// </tr>";
-
 while($row = mysqli_fetch_assoc($result)){
     $jsonArray[] = $row;
 }
-
-// echo "</table>";
 
 echo(json_encode($jsonArray));
 
