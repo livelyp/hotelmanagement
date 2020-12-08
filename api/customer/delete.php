@@ -11,10 +11,8 @@
 
     $data = json_decode(file_get_contents("php://input"), true);
 
-    echo $data[Customer_id];
-
     // sql to delete a record
-    $sql = "DELETE FROM customer WHERE Customer_id='$data[Customer_id]";
+    $sql = "DELETE FROM customer WHERE Customer_id=$data[Customer_id]";
 
     if ($db->query($sql) === TRUE) {
         echo "Record deleted successfully";
