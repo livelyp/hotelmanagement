@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Add New Staff</title>
+</head>
+<body>
+<!-- send action to addCustomer.php file -->
+ <form action="hireStaff.php" method="POST">
+  <table>
+  <tr>
+    <td>Employee ID :</td>
+    <td><input type="text" name="employee_id" required></td> <!-- the name values are referenced in the php file -->
+    </tr>
+    <tr>
+    <td>Name :</td>
+    <td><input type="text" name="name" required></td> <!-- the name values are referenced in the php file -->
+   </tr>
+   <tr>
+    <td>Phone number :</td>
+    <td><input type="text" name="phone" required></td>
+   </tr> 
+   <tr>
+    <td>Position :</td>
+    <td><input type="text" name="position" required></td>
+   </tr>
+   <tr>
+    <td>Manager ID :</td>
+    <td><input type="text" name="mgr_id" required></td>
+   </tr>
+   <tr>
+    <td>Salary :</td>
+    <td><input type="text" name="amount" required></td>
+   </tr>
+   <tr>
+    <td><input type="submit" value="Submit"></td> <!-- type value is referenced in php file -->
+   </tr>
+  </table>
+ </form>
+</body>
+</html>
