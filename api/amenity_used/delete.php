@@ -12,7 +12,7 @@
     $data = json_decode(file_get_contents("php://input"), true);
 
     // sql to delete a record
-    $sql = "DELETE FROM amenity_used WHERE Customer_id=$data[Customer_id] and Number=$data[Number] and Type=$data[Type]";
+    $sql = "DELETE FROM amenity_used WHERE Customer_id=$data[Customer_id] and Number=$data[Number] and Type='$data[Type]'";
 
     if ($db->query($sql) === TRUE) {
         echo "Record deleted successfully";
