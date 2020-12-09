@@ -12,7 +12,7 @@
     $data = json_decode(file_get_contents("php://input"), true);
 
     // sql to delete a record
-    $sql = "DELETE FROM managed_amenity WHERE Employee_id=$data[Employee_id] and Number=$data[Number] and Type=$data[Type]";
+    $sql = "DELETE FROM managed_amenity WHERE Employee_id=$data[Employee_id] and Number=$data[Number] and Type='$data[Type]'";
 
     if ($db->query($sql) === TRUE) {
         echo "Record deleted successfully";
