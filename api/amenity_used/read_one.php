@@ -16,7 +16,7 @@
     //read
     $sql = "SELECT * FROM amenity_used";
 
-    $Customer_id = htmlspecialchars($_GET["id"]);
+    $Customer_id = htmlspecialchars($_GET["type"]);
 
     //formatting into json
     if($result = $db -> query($sql)) {
