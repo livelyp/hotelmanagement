@@ -15,9 +15,9 @@
     $sql = "INSERT INTO amenity(Number, Type) VALUES('$data[Number]', '$data[Type]')";
 
     if(mysqli_query($db, $sql)) {
-        echo "New amenity created successfully";
+        echo "New amenities created successfully";
     } else {
-        echo "Error creating amenity: " . $sql . "<br>" . mysqli_error($db);
+        echo "Error: " . $sql . "<br>" . mysqli_error($db);
     }
     mysqli_close($db);
 ?>

@@ -12,12 +12,12 @@
     $data = json_decode(file_get_contents("php://input"), true);
 
     // sql to delete a record
-    $sql = "DELETE FROM amenity WHERE Number=$data[Number]";
+    $sql = "DELETE FROM amenity WHERE Number=$data[Number] and Type=$data[Type]";
 
     if ($db->query($sql) === TRUE) {
-        echo "Amenity deleted successfully";
+        echo "Record deleted successfully";
     } else {
-        echo "Error deleting amenity: " . $db->error;
+        echo "Error deleting record: " . $db->error;
     }
 
     $db->close();

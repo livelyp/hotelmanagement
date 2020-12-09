@@ -21,7 +21,7 @@
 
             $usr_item = array(
                 'Number' => $row[0],
-                'Type' => $row[1],
+                'Type' => $row[1]
             );
 
             array_push($usr_arr['data'], $usr_item);
@@ -29,6 +29,6 @@
 
         echo json_encode($usr_arr);
     } else {
-        echo json_encode(array('message' => 'No amenities Found'));
+        echo json_encode(array('message' => 'No Amenities Found'));
     }
 ?>

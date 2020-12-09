@@ -1,6 +1,6 @@
 <?php
     /*
-        Add ?id=1 to get customer with id 1
+        Add ?id=1 to get all payment types  for customer 1
     */
 
     //headers
@@ -16,7 +16,7 @@
     //read
     $sql = "SELECT * FROM amenity";
 
-    $Number = htmlspecialchars($_GET["id"]);
+    $Type = htmlspecialchars($_GET["type"]);
 
     //formatting into json
     if($result = $db -> query($sql)) {
@@ -25,7 +25,7 @@
 
         while($row = $result->fetch_row()) {
 
-            if($row[0] == $Number){
+            if($row[1] == $Type){
                 $usr_item = array(
                     'Number' => $row[0],
                     'Type' => $row[1],
@@ -37,6 +37,6 @@
 
         echo json_encode($usr_arr);
     } else {
-        echo json_encode(array('message' => 'No Customers Found'));
+        echo json_encode(array('message' => 'No Amenity Found'));
     }
 ?>
