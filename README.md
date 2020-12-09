@@ -1,4 +1,4 @@
-#CPSC 471 - Hotel Management System: User Guide
+# CPSC 471 - Hotel Management System: User Guide
 Submited by
 
 Patricia Lively - 30061152
