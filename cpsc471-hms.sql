@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 09, 2020 at 08:09 AM
+-- Generation Time: Dec 09, 2020 at 07:12 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -20,6 +20,51 @@ SET time_zone = "+00:00";
 --
 -- Database: `cpsc471-hms`
 --
+
+DELIMITER $$
+--
+-- Procedures
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getHighestPricedRoom` ()  SELECT MAX(R.room_price), R.Type
+FROM room_type as R$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getHousekeepingStaff` ()  SELECT S.Employee_id, E.Name, E.position
+FROM Staff as S, Room as R, Managed_Room as M, Employee as E
+WHERE M.Type_id = R.Type_id AND
+M.Room_num = R.Room_num AND
+M.Employee_id = S.Employee_id AND
+S.Employee_id = E.Employee_id$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getLowestPricedRoom` ()  SELECT MIN(R.room_price), R.Type
+FROM room_type as R$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getReservation` ()  SELECT R.Arrival_date, R.Checkout_date, P.Amount, PT.Type,
+P.Customer_id
+FROM reservation as R, payment_amount as P, payment_type as PT
+WHERE R.Reservation_id = P.Reservation_id AND
+P.Reservation_id = PT.Reservation_id AND
+P.Customer_id = PT.Customer_id$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getStaffOnDuty` ()  SELECT S.Employee_id, E.name, E.position
+FROM amenity as A, staff as S, employee as E, managed_Amenity as M
+WHERE M.Number = A.Number AND
+M.Type = A.Type AND
+M.Employee_id = S.Employee_id AND
+S.Employee_id = E.Employee_id$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `giveRaise` (IN `employ_id` INT(10), IN `raisePercent` INT(10))  UPDATE salary SET amount = (amount + ((raisePercent/100) * amount)) WHERE employee_id = employ_id$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `notifyCancellation` ()  SELECT C.Cancellation_id, CU.Phone
+FROM CANCEL AS C, MEMBER AS M, RESERVATION AS R, CUSTOMER AS CU
+WHERE C.Customer_id = M.Customer_id
+AND C.Reservation_id = R.Reservation_id
+AND M.Customer_id= CU.Customer_id$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `payEmployees` (IN `manager_id` INT(10))  SELECT DISTINCT S.Employee_id, E.name, SA.Amount
+FROM MANAGER AS M, STAFF AS S, SALARY AS SA, EMPLOYEE AS E
+WHERE manager_id = S.Mgr_id AND S.Employee_id=E.Employee_id AND S.Employee_id = SA.Employee_id$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -433,7 +478,7 @@ CREATE TABLE `salary` (
 --
 
 INSERT INTO `salary` (`Employee_id`, `Amount`) VALUES
-(10, 40000),
+(10, 44000),
 (12, 45000),
 (15, 35000),
 (16, 44000);
