@@ -1,6 +1,6 @@
 <?php
     /*
-        Add ?id=1 to get all type 1 rooms
+        Add ?id=1 to get the guest with customer id 1
     */
 
     //headers
@@ -10,15 +10,17 @@
     //get database
     include_once '../config/Database.php';
 
+    // Connect to database
     $database = New Database();
     $db = $database->connect();
 
-    //read
+    // Read all guests from database
     $sql = "SELECT * FROM guest";
 
+    // Get customer id from url
     $Customer_id = htmlspecialchars($_GET["id"]);
 
-    //formatting into json
+    //formatting matching guest into json
     if($result = $db -> query($sql)) {
         $usr_arr = array();
         $usr_arr['data'] = array();
@@ -34,6 +36,7 @@
             }
         }
 
+        // Ouput matching guest in json
         echo json_encode($usr_arr);
     } else {
         echo json_encode(array('message' => 'No Such Guest Found'));
