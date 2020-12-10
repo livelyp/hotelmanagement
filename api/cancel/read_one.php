@@ -1,6 +1,6 @@
 <?php
     /*
-        Add ?id=1 to get all type 1 rooms
+        Add ?id=1 to get the cancel relation with cancellation_id = 1
     */
 
     //headers
@@ -10,15 +10,17 @@
     //get database
     include_once '../config/Database.php';
 
+    // Connect to database
     $database = New Database();
     $db = $database->connect();
 
-    //read
+    // Read all attributes from cancel relation
     $sql = "SELECT * FROM cancel";
 
+    // Get cancellation_id from url
     $Cancellation_id = htmlspecialchars($_GET["id"]);
 
-    //formatting into json
+    // Formatting matching cancel relation into json
     if($result = $db -> query($sql)) {
         $usr_arr = array();
         $usr_arr['data'] = array();
@@ -36,6 +38,7 @@
             }
         }
 
+        // Ouput the matching cancel relation in json
         echo json_encode($usr_arr);
     } else {
         echo json_encode(array('message' => 'No Such Cancellation Found'));
