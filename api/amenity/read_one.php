@@ -10,15 +10,17 @@
     //get database
     include_once '../config/Database.php';
 
+    //Connect to database
     $database = New Database();
     $db = $database->connect();
 
-    //read
+    // select all attributes from amenity
     $sql = "SELECT * FROM amenity";
 
+    // get the input from the url
     $Type = htmlspecialchars($_GET["type"]);
 
-    //formatting into json
+    //formatting the tuples that match Type input into json
     if($result = $db -> query($sql)) {
         $usr_arr = array();
         $usr_arr['data'] = array();
@@ -35,6 +37,7 @@
             }
         }
 
+        // Ouput the matching tuples in json
         echo json_encode($usr_arr);
     } else {
         echo json_encode(array('message' => 'No Amenity Found'));
