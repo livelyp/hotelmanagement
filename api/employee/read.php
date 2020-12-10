@@ -1,4 +1,6 @@
 <?php
+    // File to read all employees in database 
+
     //headers
     header('Access-Control-Allow-Origin: *');
     header('Content-Type: application/json');
@@ -6,13 +8,14 @@
     //get database
     include_once '../config/Database.php';
 
+    // Conenect to database
     $database = New Database();
     $db = $database->connect();
 
-    //read
+    // Read all attributes for employees
     $sql = "SELECT * FROM employee";
 
-    //formatting into json
+    //formatting sql employee data into json
     if($result = $db -> query($sql)) {
         $usr_arr = array();
         $usr_arr['data'] = array();
@@ -29,6 +32,7 @@
             array_push($usr_arr['data'], $usr_item);
         }
 
+        // Ouput employee data in json
         echo json_encode($usr_arr);
     } else {
         echo json_encode(array('message' => 'No Employees Found'));
