@@ -10,15 +10,17 @@
     //get database
     include_once '../config/Database.php';
 
+    // Connect to database
     $database = New Database();
     $db = $database->connect();
 
-    //read
+    // Read all attributes from customer
     $sql = "SELECT * FROM customer";
 
+    // Get the customer id from url
     $Customer_id = htmlspecialchars($_GET["id"]);
 
-    //formatting into json
+    //formatting matching customer into json
     if($result = $db -> query($sql)) {
         $usr_arr = array();
         $usr_arr['data'] = array();
@@ -36,9 +38,10 @@
                 array_push($usr_arr['data'], $usr_item);
             }
         }
-
+        
+        // Ouput the matching customer in json
         echo json_encode($usr_arr);
     } else {
-        echo json_encode(array('message' => 'No Customers Found'));
+        echo json_encode(array('message' => 'No Such Customer Found'));
     }
 ?>
