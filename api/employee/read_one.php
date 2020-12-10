@@ -1,6 +1,6 @@
 <?php
     /*
-        Add ?id=1 to get customer with id 1
+        Add ?id=1 to get employee with id 1
     */
 
     //headers
@@ -10,15 +10,17 @@
     //get database
     include_once '../config/Database.php';
 
+    // Connect to database
     $database = New Database();
     $db = $database->connect();
 
-    //read
+    // Read all atrributes from employee
     $sql = "SELECT * FROM employee";
 
+    // Get desired employee from url
     $Employee_id = htmlspecialchars($_GET["id"]);
 
-    //formatting into json
+    //formatting matching employee into json
     if($result = $db -> query($sql)) {
         $usr_arr = array();
         $usr_arr['data'] = array();
@@ -37,6 +39,7 @@
             }
         }
 
+        // Output matching employee in json
         echo json_encode($usr_arr);
     } else {
         echo json_encode(array('message' => 'No Such Employee Found'));
