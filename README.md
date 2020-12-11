@@ -51,6 +51,6 @@ Since the customer_id will automatically increment, the ```customer_id``` field 
 
 ### Running Stored Procedures
 
-To run the procedures  that is stored on the database, upon importing ```cpsc471-hms.sql``` to the ```cpsc471-hms``` database inside phpMyAdmin, select the database and click on the ```Routines``` tab (the ```Procdeures``` button under the database will navigate to the same Routines tab as well).
+To run the procedures  that is stored on the database, upon importing ```cpsc471-hms.sql``` to the ```cpsc471-hms``` database inside phpMyAdmin, select the database and click on the ```Routines``` tab (the ```Procedures``` button under the database will navigate to the same Routines tab as well).
 
 To run a stored procedure, click on ```Execute```, and enter any required fields upon request.
