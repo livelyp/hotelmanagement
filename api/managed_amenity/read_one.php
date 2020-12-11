@@ -1,6 +1,6 @@
 <?php
     /*
-        Add ?id=1 to get all payment types  for customer 1
+        Add ?id=1 to get all managed amenities  for employee 1
     */
 
     //headers
@@ -10,15 +10,17 @@
     //get database
     include_once '../config/Database.php';
 
+    // Connect to database
     $database = New Database();
     $db = $database->connect();
 
-    //read
+    // Read all attributes from managed amenity in databasse
     $sql = "SELECT * FROM managed_amenity";
 
+    // Get employee id from url
     $Employee_id = htmlspecialchars($_GET["id"]);
 
-    //formatting into json
+    //formatting matching managed amenity into json
     if($result = $db -> query($sql)) {
         $usr_arr = array();
         $usr_arr['data'] = array();
@@ -35,7 +37,8 @@
                 array_push($usr_arr['data'], $usr_item);
             }
         }
-
+    
+        // Output all amenities managed by the given employee
         echo json_encode($usr_arr);
     } else {
         echo json_encode(array('message' => 'No Amenities managed by this employee Found'));
