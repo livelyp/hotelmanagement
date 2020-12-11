@@ -7,6 +7,8 @@ Carmen Khuu - 10061552
 
 Hamza Gohar - 30066720
 
+### API Documentation
+https://documenter.getpostman.com/view/13734852/TVmV5DtR#85875c7c-502f-41be-8f1e-ea4bab8bcfcb
 
 ## Installation
 
