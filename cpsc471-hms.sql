@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 09, 2020 at 07:12 PM
+-- Generation Time: Dec 11, 2020 at 10:47 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -25,7 +25,7 @@ DELIMITER $$
 --
 -- Procedures
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `getHighestPricedRoom` ()  SELECT MAX(R.room_price), R.Type
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getHighestPricedRoom` ()  SELECT MAX(R.room_price), MAX(R.Type)
 FROM room_type as R$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `getHousekeepingStaff` ()  SELECT S.Employee_id, E.Name, E.position
@@ -118,6 +118,13 @@ CREATE TABLE `cancel` (
   `Cancellation_id` smallint(5) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `cancel`
+--
+
+INSERT INTO `cancel` (`Reservation_id`, `Customer_id`, `Cancellation_id`) VALUES
+(101, 1, 3);
+
 -- --------------------------------------------------------
 
 --
@@ -145,7 +152,9 @@ INSERT INTO `customer` (`Customer_id`, `Phone`, `Fname`, `Lname`) VALUES
 (12, '4035555555', 'Amy', 'Lee'),
 (13, '4037777777', 'Will', 'Robinson'),
 (14, '4037654321', 'Keanu', 'Reeves'),
-(15, '5877777771', 'Rob', 'Loblaw');
+(15, '5877777771', 'Rob', 'Loblaw'),
+(16, '4033452345', 'Travis', 'Knope'),
+(18, '4032223333', 'Dave', 'Jones');
 
 -- --------------------------------------------------------
 
@@ -481,7 +490,8 @@ INSERT INTO `salary` (`Employee_id`, `Amount`) VALUES
 (10, 44000),
 (12, 45000),
 (15, 35000),
-(16, 44000);
+(16, 44000),
+(23, 55000);
 
 -- --------------------------------------------------------
 
@@ -649,13 +659,13 @@ ALTER TABLE `staff`
 -- AUTO_INCREMENT for table `cancel`
 --
 ALTER TABLE `cancel`
-  MODIFY `Cancellation_id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Cancellation_id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `Customer_id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `Customer_id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `reservation`
