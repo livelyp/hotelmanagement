@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 11, 2020 at 10:47 AM
+-- Generation Time: Dec 11, 2020 at 08:35 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -28,7 +28,7 @@ DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `getHighestPricedRoom` ()  SELECT MAX(R.room_price), MAX(R.Type)
 FROM room_type as R$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `getHousekeepingStaff` ()  SELECT S.Employee_id, E.Name, E.position
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getHousekeepingStaff` ()  SELECT DISTINCT S.Employee_id, E.Name, E.position
 FROM Staff as S, Room as R, Managed_Room as M, Employee as E
 WHERE M.Type_id = R.Type_id AND
 M.Room_num = R.Room_num AND
@@ -45,7 +45,7 @@ WHERE R.Reservation_id = P.Reservation_id AND
 P.Reservation_id = PT.Reservation_id AND
 P.Customer_id = PT.Customer_id$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `getStaffOnDuty` ()  SELECT S.Employee_id, E.name, E.position
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getStaffOnDuty` (IN `Number` SMALLINT(5) UNSIGNED, IN `Type` CHAR(60))  SELECT DISTINCT S.Employee_id, E.name, E.position
 FROM amenity as A, staff as S, employee as E, managed_Amenity as M
 WHERE M.Number = A.Number AND
 M.Type = A.Type AND
@@ -54,7 +54,7 @@ S.Employee_id = E.Employee_id$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `giveRaise` (IN `employ_id` INT(10), IN `raisePercent` INT(10))  UPDATE salary SET amount = (amount + ((raisePercent/100) * amount)) WHERE employee_id = employ_id$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `notifyCancellation` ()  SELECT C.Cancellation_id, CU.Phone
+CREATE DEFINER=`root`@`localhost` PROCEDURE `notifyCancellation` (IN `Reservation_id` SMALLINT(5) UNSIGNED)  SELECT DISTINCT C.Cancellation_id, CU.Phone
 FROM CANCEL AS C, MEMBER AS M, RESERVATION AS R, CUSTOMER AS CU
 WHERE C.Customer_id = M.Customer_id
 AND C.Reservation_id = R.Reservation_id
