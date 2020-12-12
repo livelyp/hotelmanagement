@@ -9,16 +9,18 @@
 
     //get database
     include_once '../config/Database.php';
-
+    
+    // Connect to database
     $database = New Database();
     $db = $database->connect();
 
-    //read
+    //read all attributes from room
     $sql = "SELECT * FROM room";
 
+    // get room type wanted from url
     $Type_id = htmlspecialchars($_GET["id"]);
 
-    //formatting into json
+    //formatting all rooms of matching type into json
     if($result = $db -> query($sql)) {
         $usr_arr = array();
         $usr_arr['data'] = array();
@@ -35,8 +37,9 @@
             }
         }
 
+        // Output all rooms matching the type in json
         echo json_encode($usr_arr);
     } else {
-        echo json_encode(array('message' => 'No Room Found'));
+        echo json_encode(array('message' => 'No Rooms Found'));
     }
 ?>
