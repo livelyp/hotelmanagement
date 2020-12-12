@@ -1,6 +1,6 @@
 <?php
     /*
-        Add ?id=1 to get all payment types  for customer 1
+        Add ?id=1 to get all payment types for customer 1
     */
 
     //headers
@@ -10,15 +10,17 @@
     //get database
     include_once '../config/Database.php';
 
+    // Connect to database
     $database = New Database();
     $db = $database->connect();
 
-    //read
+    //read all attributes from payment type
     $sql = "SELECT * FROM payment_type";
 
+    // Get customer id input from url
     $Customer_id = htmlspecialchars($_GET["id"]);
 
-    //formatting into json
+    //formatting all matching cusstomer id payment types into json
     if($result = $db -> query($sql)) {
         $usr_arr = array();
         $usr_arr['data'] = array();
@@ -36,8 +38,9 @@
             }
         }
 
+        // Output a customers payment types in json
         echo json_encode($usr_arr);
     } else {
-        echo json_encode(array('message' => 'No Payment Type Found'));
+        echo json_encode(array('message' => 'No Payment Types Found'));
     }
 ?>
