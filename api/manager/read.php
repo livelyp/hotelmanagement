@@ -1,4 +1,6 @@
 <?php
+    // File to read all the manager data in the database
+
     //headers
     header('Access-Control-Allow-Origin: *');
     header('Content-Type: application/json');
@@ -6,13 +8,14 @@
     //get database
     include_once '../config/Database.php';
 
+    // Connect to database
     $database = New Database();
     $db = $database->connect();
 
-    //read
+    // Read all the attributes from manager
     $sql = "SELECT * FROM manager";
 
-    //formatting into json
+    //formatting all managers into json
     if($result = $db -> query($sql)) {
         $usr_arr = array();
         $usr_arr['data'] = array();
@@ -28,6 +31,7 @@
             array_push($usr_arr['data'], $usr_item);
         }
 
+        // Output all managers as json
         echo json_encode($usr_arr);
     } else {
         echo json_encode(array('message' => 'No Managers Found'));
