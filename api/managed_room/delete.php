@@ -22,9 +22,9 @@
 
     // Output result of delete operation
     if ($db->query($sql) === TRUE) {
-        echo "Record deleted successfully";
+        echo "Managed room relation deleted successfully";
     } else {
-        echo "Error deleting record: " . $db->error;
+        echo "Error deleting managed room relation: " . $db->error;
     }
 
     $db->close();
