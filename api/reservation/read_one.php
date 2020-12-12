@@ -1,6 +1,6 @@
 <?php
     /*
-        Add ?id=1 to get all type 1 rooms
+        Add ?id=1 to get reservation information from the id 1
     */
 
     //headers
@@ -10,15 +10,17 @@
     //get database
     include_once '../config/Database.php';
 
+    // connect to database
     $database = New Database();
     $db = $database->connect();
 
-    //read
+    //read all attributes from reservation
     $sql = "SELECT * FROM reservation";
 
+    // Get reservation id from url
     $Reservation_id = htmlspecialchars($_GET["id"]);
 
-    //formatting into json
+    //formatting matching reservation into json
     if($result = $db -> query($sql)) {
         $usr_arr = array();
         $usr_arr['data'] = array();
@@ -36,6 +38,7 @@
             }
         }
 
+        // Output the matching reservation information in json
         echo json_encode($usr_arr);
     } else {
         echo json_encode(array('message' => 'No Such Reservation Found'));
