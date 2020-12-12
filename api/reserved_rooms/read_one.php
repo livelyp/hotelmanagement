@@ -1,6 +1,6 @@
 <?php
     /*
-        Add ?id=1 to get all type 1 rooms
+        Add ?id=1 to get the reserved room for the reservation id 1
     */
 
     //headers
@@ -10,15 +10,17 @@
     //get database
     include_once '../config/Database.php';
 
+    // Connect to database
     $database = New Database();
     $db = $database->connect();
 
-    //read
+    //read all attributes from reserved rooms
     $sql = "SELECT * FROM reserved_rooms";
 
+    // get resevation id from url
     $Reservation_id = htmlspecialchars($_GET["id"]);
 
-    //formatting into json
+    //formatting matching reserved room into json
     if($result = $db -> query($sql)) {
         $usr_arr = array();
         $usr_arr['data'] = array();
@@ -36,6 +38,7 @@
             }
         }
 
+        // Output matching reserved room in json
         echo json_encode($usr_arr);
     } else {
         echo json_encode(array('message' => 'No Such Reserved Room Found'));
