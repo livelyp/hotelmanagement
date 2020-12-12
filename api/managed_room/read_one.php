@@ -1,6 +1,6 @@
 <?php
     /*
-        Add ?id=1 to get all payment types  for customer 1
+        Add ?id=1 to get all rooms managaed by employee 1
     */
 
     //headers
@@ -10,15 +10,17 @@
     //get database
     include_once '../config/Database.php';
 
+    // Connect to database
     $database = New Database();
     $db = $database->connect();
 
-    //read
+    // Read all attributes from manager room
     $sql = "SELECT * FROM managed_room";
 
+    // Get desired employee id from url
     $Employee_id = htmlspecialchars($_GET["id"]);
 
-    //formatting into json
+    //formatting matching room into json
     if($result = $db -> query($sql)) {
         $usr_arr = array();
         $usr_arr['data'] = array();
@@ -36,8 +38,9 @@
             }
         }
 
+        // Output all rooms managed by the employee in json
         echo json_encode($usr_arr);
     } else {
-        echo json_encode(array('message' => 'No rooms managed by this employee Found'));
+        echo json_encode(array('message' => 'No rooms managed by this employee found'));
     }
 ?>
