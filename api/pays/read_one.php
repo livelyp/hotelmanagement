@@ -1,6 +1,6 @@
 <?php
     /*
-        Add ?id=1 to get customer with id 1
+        Add ?id=1 to get all pay relations connect to manager with employee id 1
     */
 
     //headers
@@ -10,15 +10,17 @@
     //get database
     include_once '../config/Database.php';
 
+    // Connect to database
     $database = New Database();
     $db = $database->connect();
 
-    //read
+    //read all attributes from pays
     $sql = "SELECT * FROM pays";
 
+    // get employee id from manager in url
     $Mgr_id = htmlspecialchars($_GET["id"]);
 
-    //formatting into json
+    //formatting employees that the manager need to pay into json
     if($result = $db -> query($sql)) {
         $usr_arr = array();
         $usr_arr['data'] = array();
@@ -35,6 +37,7 @@
             }
         }
 
+        // Output matching manager pays relation in json
         echo json_encode($usr_arr);
     } else {
         echo json_encode(array('message' => 'No pays relation for this manager found'));
