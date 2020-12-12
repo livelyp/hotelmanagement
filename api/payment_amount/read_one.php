@@ -1,6 +1,6 @@
 <?php
     /*
-        Add ?id=1 to get all payment types  for customer 1
+        Add ?id=1 to get all payment amounts for customer id 1
     */
 
     //headers
@@ -10,15 +10,17 @@
     //get database
     include_once '../config/Database.php';
 
+    // Connect to database
     $database = New Database();
     $db = $database->connect();
 
-    //read
+    // Read all attribtes from payment amount
     $sql = "SELECT * FROM payment_amount";
 
+    // Get customer id input from url
     $Customer_id = htmlspecialchars($_GET["id"]);
 
-    //formatting into json
+    //formatting matching reservation payment amount into json
     if($result = $db -> query($sql)) {
         $usr_arr = array();
         $usr_arr['data'] = array();
@@ -36,6 +38,7 @@
             }
         }
 
+        // Output all payment amounts made by the customer
         echo json_encode($usr_arr);
     } else {
         echo json_encode(array('message' => 'No Payment Amount Found'));
